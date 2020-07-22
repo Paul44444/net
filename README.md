@@ -32,4 +32,4 @@ The file jaccard.py  does the same, but uses the jaccard distance.
 SE = \frac{\sigma}{\sqrt{n}}
 ```
 
-$`\sqrt{2}`$
+$```\sqrt{2}```$

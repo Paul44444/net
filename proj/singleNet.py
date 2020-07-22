@@ -1,11 +1,4 @@
-import numpy as np
-import networkx as nx
-
-from imnet import process_strings as p
-
 import os
-import pyspark
-from scipy.sparse import csr_matrix
 from sparkhpc import sparkjob
 import findspark
 
@@ -94,14 +87,22 @@ if __name__ == "__main__":
     plotData = PlotDataSingleNet()
 
     # info: set parameters
+    #     N: number of generated strains
+    #     min_ldVal/ max_ldVal: min. / max. levenshtein distance
+    #     extractNum: number of extracted amino acids from each strain
+    #     alphaVal: 
+    # What's alphaVal? 
     plotData.N = 10**3
-    plotData.min_ldVal = 0
-    plotData.max_ldVal = 1
-    plotData.extractNum = 18
+    plotData.min_ldVal = 0 # perhaps check, that this is the levenshtein distance
+    plotData.max_ldVal = 3
+    # info: if only a certain number of acids should be extracted, 
+    #     set isExtractNum = True when calling the sim() function
+    #     and set plotData.extractNum to the desired value
+    # plotData.extractNum = 18
     plotData.alphaVal = 0.5
     
     # info: perform the simulation and save the results in the plotData object
-    plotData = fd.sim(scVal, plotData)
+    plotData = fd.sim(scVal, plotData, isExtractNum = False)
     
     # info: write the plotData to .txt-files
-    write(plotData)
+    #write(plotData)

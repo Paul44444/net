@@ -7,14 +7,6 @@ info:
     - use the JACCARD DISTANCE
 """
 
-import numpy as np
-import networkx as nx
-
-import pyspark
-from imnet import process_strings as p
-
-import textdistance as td # better cite that
-
 from plotData import PlotDataLevenshtein
 import funcDictionaryJaccard as fd
 
@@ -114,26 +106,28 @@ if __name__ == "__main__":
         plotData = PlotDataLevenshtein()
         
         # info: set important parameters
-        plotData.Ns = [10**2]
-        plotData.N = 10**2 # what of these two is important?
-        plotData.extractNum = 6#18 #6
+        #plotData.Ns = [10**2, 2*10**2, 3*10**2, 5*10**2, 10**3]
+        # info: Don't set plotData.N = [1000], that will give an error, do plotData.N = 1000 instead
+        plotData.N = 10**3
+
+        #plotData.extractNum = 6#18 #6
         plotData.samples = 5# usually: 6
-        plotData.maxValIndices = [1, 2, 3, 4, 5]
+        #plotData.maxValIndices = [1, 2, 3, 4, 5]
         
         # info: set "unimportant" parameters
         plotData.lenVals = list()
         for i in range(2):
             plotData.lenVals.append(0)
-        plotData.itsMax = 10**3
+        plotData.itsMax = 10**3  # What's that?
         
         # info: jaccard distance is always in the range [0,1], 
         #     thus a maximum distance of e.g. 2 would make no sense, 
         #     that would always be fulfilled:
-        plotData.maxDist = 0.05
+        plotData.maxDist = 0.05 # What is a good value?
         plotData.maxValue = plotData.maxDist
         
         # info: perform the simulation and save the results in the plotData object
-        plotData = fd.sim(step, plotData)
+        plotData = fd.sim(step, plotData, isExtractNum=False)
         
         # info: write the plotData to .txt-files
-        write(step, plotData)
+        #write(step, plotData)

@@ -1,12 +1,9 @@
-import numpy as np
 import networkx as nx
 
-import pyspark
 from imnet import process_strings as p
 
 import textdistance as td # better cite that
 
-from plotData import PlotData
 from plotData import InnerDataLevenshtein
 
 import funcDictionary as dic
@@ -50,8 +47,12 @@ def makeNet(names, maxDist):
         names is an array of strings.
         if the jaccard distance between the strings, corresponding 
         to two nodes, is lower than "maxDist", an edge is drawn
-    input: names:[String], maxDist (number)
-    output: 
+    input: names:[String]:  list of strings
+        maxDist (real number from 0 to 1): maximum jaccard distance between two strings,
+            which is required to form a bond
+    output: g: created graph, where each strain is a node and two nodes are
+        connected via an edge, if there jaccard distance is smaller
+        than maxDist
     """
     g = nx.Graph()
 
@@ -72,7 +73,7 @@ def jaccardDist(name1, name2):
     info: calculate the jaccard distance between the two strings 
         name1, name2
     input: name1:String, name2:String
-    output: distance value dist (number)
+    output: distance value dist (real number within [0, 1])
     """
     """
     dist = 0
@@ -86,14 +87,18 @@ def jaccardDist(name1, name2):
     dist = 1 - td.jaccard(name1, name2)
     return dist
 
-def sim(step, plotData): 
+def sim(step, plotData, isExtractNum): 
     """
     info: perform the simulation
-    input: step (0, if pre selection; 1, if post selection)
+    input: step (0, if pre selection; 1, if post selection), 
+        plotData: PlotData object, that contains the important data and parameters;
+            for more detail see documentation in plotData.py
+        isExtractNum: Bool, that says, if only a limited number of 
+            letters should be extracted;
     output: -
     """
     
-    itsMax = 10**3
+    #itsMax = 10**3 - probably not relevant
     # info: jaccard distance is always in the range [0,1], 
     #     thus a maximum distance of e.g. 2 would make no sense, 
     #     that would always be fulfilled:
@@ -105,7 +110,7 @@ def sim(step, plotData):
         innerData.xArgs = list()
         
         # info: load data
-        a, a4, seq, filename, ls = dic.loadSequence(step, plotData)
+        a, a4, seq, filename, ls = dic.loadSequence(step, plotData, isExtractNum = isExtractNum)
         # info: sort into a list, where each entry contains all strains with a certain length l
         nets = dic.make_nets(ls, seq)
         

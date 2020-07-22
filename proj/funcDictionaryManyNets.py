@@ -1,16 +1,7 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import networkx as nx
+import networkx as nx # info: this time it is really used
 
-import pyspark
-from imnet import process_strings as p
-
-import os
-from sparkhpc.sparkjob import LSFSparkJob
-import findspark
-import pyspark
-from scipy.sparse import csr_matrix
-from sparkhpc import sparkjob
+from imnet import process_strings
 
 from plotData import PlotDataManyNets
 from plotData import InnerDataManyNets
@@ -103,7 +94,18 @@ def divide_by_samples_post_add(innerDataJobPre, plotData, samples):
     plotData.isConnectedsPost += np.divide(innerDataJobPre.isConnected,samples)
     return plotData
 
-def sim(scVal, plotData):
+def sim(scVal, plotData, isExtractNum):
+    """
+    info: perform the simulation and write the results in the plotData object, which is finally returned
+    input: scVal: spark context
+        plotData: PlotData object, that contains the important data and parameters;
+            for more detail see documentation in plotData.py
+        isExtractNum: Bool, that says, if only a limited number of 
+            letters should be extracted;
+    output: 
+        plotData: PlotData object with updated members 
+        
+    """
     for maxValIndex in range(len(plotData.maxValIndices)):
             maxVal = plotData.maxValIndices[maxValIndex]
             plotData.max_ldVal = maxVal
@@ -119,10 +121,11 @@ def sim(scVal, plotData):
 	
                     for i in range(len(plotData.Ns)):
                         # info: load data
-                        a, a4, seq, filename, _ = dic.loadSequence(step, plotData)
+                        a, a4, seq, filename, _ = dic.loadSequence(step, plotData, i, isExtractNum=isExtractNum)
                         
                         # info: generate graph
-                        G = p.generate_graph(seq, min_ld=plotData.min_ldVal, \
+                        
+                        G = process_strings.generate_graph(seq, min_ld=plotData.min_ldVal, \
                             max_ld=plotData.max_ldVal, sc=scVal)
                         
                         # info: make degrees and clusters (?)

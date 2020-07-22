@@ -3,24 +3,22 @@
 import numpy as np
 import networkx as nx
 
-import os
+#import pyspark
+from imnet import process_strings as p  # used?
 
-import pyspark
-from imnet import process_strings as p
+#import subprocess
+#import re
+#from IPython.display import HTML
 
-import subprocess
-import re
-from IPython.display import HTML
+#import sparkhpc
+#from sparkhpc import sparkjob
+#from sparkhpc.sparkjob import LSFSparkJob
+#import findspark
+#from scipy.sparse import csr_matrix
 
-import sparkhpc
-from sparkhpc import sparkjob
-from sparkhpc.sparkjob import LSFSparkJob
-import findspark
-from scipy.sparse import csr_matrix
-
-from plotData import PlotData
-from plotData import InnerDataLevenshtein
-from plotData import PlotDataLevenshtein
+#from plotData import PlotData
+#from plotData import InnerDataLevenshtein
+#from plotData import PlotDataLevenshtein
 
 def make_nets(ls, seq): # We still need seq? What is that?
     """
@@ -28,8 +26,8 @@ def make_nets(ls, seq): # We still need seq? What is that?
         a list again, containing all sequences with a certain 
         length
     input:
-        seq: array of nucleic acid sequences 
         ls:  list of length values for each sequence in seq
+        seq: array of nucleic acid sequences 
     output: 
         nets: list of nets, where each element "net" is 
         a list again, containing all sequences with a certain 
@@ -52,7 +50,7 @@ def make_nets(ls, seq): # We still need seq? What is that?
         seqElIndex = int((len(seqEl) - lsHist[1][0])/3)
         nets[seqElIndex].append(seqEl)
     return nets
-def loadSequence(step, plotData):
+def loadSequence(step, plotData, i = -1, isExtractNum = True):
     """
     info: - load the nucleic acid sequences, generated from SONIA 
         (and stored in a file 'pre.txt' or 'post.txt')
@@ -62,16 +60,37 @@ def loadSequence(step, plotData):
         the sequences in "ls"
     input: step: 0 -> data before the Thymus selection (load from pre.txt)
                  1 -> data after the Thymus selection (load from post.txt)
+        plotData: PlotData object, that contains the important data and parameters;
+            for more detail see documentation in plotData.py
+        i: int number of letters to be extracted from each strain, e.g. if i = 18,
+            then only the first 18 letters from each strain are extracted, the rest
+            is ignored
+        isExtractedNum: Bool, that says, if only a limited number of 
+            letters should be extracted; Thus, if isExtractNum == False, it makes no
+            sense, to set i > -1, because everything is extracted anyway.
+            If isExtractNum == True, i must be set to a certain value > -1.
     output: a: list, containing all the loaded data
         a4: list, containing the nucleic acid sequences
         seq: list, containing the nucleic acid sequences first acids until 
             the upper threshold "extractNum"
+        filename: string (either 'pre.txt' or 'post.txt')
+        ls: list of length values for each sequence in seq
     """
     # info: define filename
     if step == 0:
         filename = 'pre.txt'
     if step == 1:
         filename = 'post.txt'
+
+    # info: check, if plotData has an Ns-array, then choose N = plotData.Ns[i]; alternatively choose N = plotData.N[i]
+    if i > -1:
+        try: 
+            N = plotData.Ns[i]
+        except: 
+            print("\n Could not load element plotData.Ns[i]. Perhaps it does not exist?")
+            N = -1
+    else:
+        N = plotData.N
 
     # info: make variables and lists as empty or zero objects
     index = 0
@@ -86,11 +105,14 @@ def loadSequence(step, plotData):
     
     with open(filename) as f:
         for line in f.readlines():
-            if index < plotData.N:
+            if index < N:
                 a.append(line.split('\t'))
                 # info: attach the fourth element  to a4
                 a4.append(a[index][3].replace('\n', ''))
-                seq.append(a4[index][:plotData.extractNum])
+                if isExtractNum == True:
+                    seq.append(a4[index][:plotData.extractNum])
+                else:
+                    seq.append(a4[index][:])
                 ls.append(len(seq[index]))
                 
                 index += 1
@@ -171,7 +193,8 @@ def append_values(innerData, GSub, G):
 def mean_and_error_of(plotData):
     """
     info: calculate the average values of the network properties, using the data in "plotData"
-    input: plotData
+    input: plotData: PlotData object, that contains the important data and parameters;
+            for more detail see documentation in plotData.py
     output: plotData with updated members
     """
     # info: calculate the Means and the Errors
@@ -243,7 +266,9 @@ def make_all_data(plotData, innerData, sample): # check description
 def convert_to_amino_acids(plotData, innerData): # check description
     """
     info: convert lengths to the aminoacids
-    input: plotData, innerData: objects, that store network properties in list # in more detail perhaps
+    input: plotData: PlotData object, that contains the important data and parameters;
+            for more detail see documentation in plotData.py
+        innerData: objects, that store network properties in list # in more detail perhaps
     output: plotData: object, that stores the network properties, now with updated members
     """
 
@@ -288,16 +313,20 @@ def makeDegreeDistribution(G): # I think the name does not describe, what that a
     info: calculate a list, which contains the sizes (number of nodes) of each connected subgraph (thus each cluster)
     input: G: graph
     output: clustersizes: list with the lengths of all clusters in G
+        c: list of degree values of each node
     """
 
     # info: make the degree distribution
     a = G.degree()
+    
+    # info: b: list, where each element is an array: element 0 is the strain and element 1 is the corresponding degree value
     b = list(a)
+
+    # info: make list c, which only contains the degree values
     c = list()
     for i in range(len(b)):
         # what is this element? ...; Is that later used?
         c.append(b[i][1])
-
         # info: make the clusters, clustersizes
     clusters = list(nx.connected_components(G))
     clustersizes = list()

@@ -1,15 +1,5 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import networkx as nx
-
-import pyspark
-from imnet import process_strings as p
-
 import os
-from sparkhpc.sparkjob import LSFSparkJob
 import findspark
-import pyspark
-from scipy.sparse import csr_matrix
 from sparkhpc import sparkjob
 
 from plotData import PlotDataManyNets
@@ -79,6 +69,7 @@ def write(plotData):
     text_file.close()
     
     name = "txt/Ns.txt"
+    print("\n Ns: ", list(Ns))
     text_file = open(name, "w")
     for i in range(len(Ns)):
         text_file.write(str("\n " + str(Ns[i])))
@@ -106,23 +97,23 @@ if __name__ == "__main__":
     plotData = PlotDataManyNets()
     
     # info: initialize params
-    plotData.Ns = [10**2, 10**3]
-    plotData.N = 10**2 # just added, so that it works for now
+    #plotData.Ns = [5*10**2, 10**3, 1.5*10**3, 10**4, 10**5]
+    plotData.Ns = [5*10**2, 10**3, 1.5*10**3]
     #info: number of extracted letters from the DNA sequence 
-    plotData.extractNum = 18
+    plotData.min_ldVal = -1
+    #info: maximum levenshtein distance
+    plotData.maxValIndices = [3] # before 6; Shouldn't 1 be the best choice?
+
+    # info: if only a certain number of acids should be extracted, 
+    #     set isExtractNum = True when calling the sim() function
+    #     and set plotData.extractNum to the desired value
+    #plotData.extractNum = 18
 
     # info: samples = 6 is usual
     plotData.samples = 2
 
-    # info: maximum levenshtein distance
-    plotData.maxValIndices = [6] 
-   
-    plotData.minL = 5 # 4
-    plotData.maxL = 10
-    plotData.min_ldVal = -1
-
     # info: perform the simulation and save the results in the plotData object
-    plotData = fd.sim(scVal, plotData)
+    plotData = fd.sim(scVal, plotData, isExtractNum=False)
 
     # info: write the plotData to .txt-files
-    write(plotData)
+    #write(plotData)

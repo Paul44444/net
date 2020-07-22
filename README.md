@@ -30,8 +30,7 @@ The file jaccard.py  does the same, but uses the jaccard distance.
 
 <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
 
-![Image of Yaktocat](https://octodex.github.com/image
-s/yaktocat.png)
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
 
 ```math
 a^2+b^2=c^2

@@ -31,3 +31,5 @@ The file jaccard.py  does the same, but uses the jaccard distance.
 ```math
 SE = \frac{\sigma}{\sqrt{n}}
 ```
+
+$`\sqrt{2}`$

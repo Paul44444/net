@@ -27,3 +27,7 @@ The file manyNets.py compares the network properties of Networks with different 
 The file levenshtein.py analyses the network properties in dependence of the maximum allowed levenshtein distance for 
 creating an edge between two nodes, where each node represents a DNA strain.
 The file jaccard.py  does the same, but uses the jaccard distance.
+
+```math
+SE = \frac{\sigma}{\sqrt{n}}
+```

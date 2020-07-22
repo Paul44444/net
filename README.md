@@ -28,4 +28,4 @@ The file levenshtein.py analyses the network properties in dependence of the max
 creating an edge between two nodes, where each node represents a DNA strain.
 The file jaccard.py  does the same, but uses the jaccard distance.
 
-#<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
+<!--- <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1"> ---> 

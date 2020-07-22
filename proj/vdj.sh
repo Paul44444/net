@@ -1,16 +1,10 @@
-# create file with the pre and post vdj recombination results
+# info: create file with the pre and post vdj recombination results; 5 samples
 
-sonia-generate --humanTRB -n 100000 --pre -o pre1.txt
-sonia-generate --humanTRB -n 100000 --post -o post1.txt
+len=100
+samples=5
 
-sonia-generate --humanTRB -n 100000 --pre -o pre2.txt
-sonia-generate --humanTRB -n 100000 --post -o post2.txt
-
-sonia-generate --humanTRB -n 100000 --pre -o pre3.txt
-sonia-generate --humanTRB -n 100000 --post -o post3.txt
-
-sonia-generate --humanTRB -n 100000 --pre -o pre4.txt
-sonia-generate --humanTRB -n 100000 --post -o post4.txt
-
-sonia-generate --humanTRB -n 100000 --pre -o pre5.txt
-sonia-generate --humanTRB -n 100000 --post -o post5.txt
+for i in $(seq 1 1 $samples)
+do
+    sonia-generate --humanTRB -n $len --pre -o "preTest$i.txt"
+    sonia-generate --humanTRB -n $len --post -o "postTest$i.txt"
+done

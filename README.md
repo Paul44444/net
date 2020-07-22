@@ -33,22 +33,18 @@ The file jaccard.py  does the same, but uses the jaccard distance.
 In order to execute the file, it can just be started with 
 
 ```
-net
-├─ singleNet.py
-├─ manyNets.py
-├─ levenshtein.py
-├─ jaccard.py
-├─ funcDictionarySingleNet.py
-├─ funcDictionaryManyNets.py
-├─ funcDictionaryLevenshtein.py
-├─ funcDictionaryJaccard.py
-├─ funcDictionary.py
-└─ plotData.py
-```
-
-```
 python singleNet.py
 python manyNets.py
 python levenshtein.py
 python jaccard.py
+```
+
+The results are saved in the txt-directory. In order to plot the data and save it as .png-data, the 
+corresponding plot-files can be executed:
+
+```
+python singleNetPlot.py
+python manyNetsPlot.py
+python levenshteinPlot.py
+python jaccardPlot.py
 ```

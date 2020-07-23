@@ -300,7 +300,7 @@ def makeDegreeDistribution(G): # I think the name does not describe, what that a
         c: list of degree values of each node
     """
 
-    # info: make the degree distribution
+    # info: make a list of degrees of all nodes
     a = G.degree()
     
     # info: b: list, where each element is an array: element 0 is the strain and element 1 is the corresponding degree value

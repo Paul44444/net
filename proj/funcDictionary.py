@@ -283,16 +283,14 @@ def convert_to_amino_acids(plotData, innerData): # check description
 
 def degree_mean(GSub):
     """
-    info: calculate the average degree in the graph GSub
+    info: calculate the mean degree in the graph GSub
     input: GSub: graph
-    output: deg: average degree number (real number)
+    output: degree_mean: mean degree number (real number)
     """
-    deg = 0
-    degs = GSub.degree()
-    degs = list(degs)
-    for el in degs:
-        deg += el[1]/(len(degs))
-    return deg
+   
+    degrees = GSub.degree()
+    degree_mean = sum(degrees)/len(degrees)
+    return degree_mean
 
 def makeDegreeDistribution(G): # I think the name does not describe, what that actually does; better change name
     """

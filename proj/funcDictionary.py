@@ -124,30 +124,16 @@ def make_sub_graphs(G):
 
     return sub_graphs
 
-def biggest_sub_graph(sub_graphs):
+def largest_sub_graph(G):
     """
-    info: choose the biggest sub_graph
-    input: sub_graphs: list of graphs
-    output: GSub: biggest subgraph in sub_graphs
+    info: choose the largest component
+    input: G: a graph
+    output: Gc: largest component of G as subgraph
     """
-    # info: setting values n, maxIndex, maxValue
-    #     maxValue: number of nodes of the biggest subgraph
-    #     maxIndex: index of the biggest subgraph
-
-    n = len(sub_graphs) # info: number of sub_graphs
-    maxIndex = -1 # info: will become index of the biggest found sub_graph
-    maxValue = -1 # info: will become the size of the biggest found sub_graph
-
-    # info: find the value of the biggest subgraph and its index
-    for ii in range(n):
-        if len(list(sub_graphs[ii])) > 0:
-            if len(sub_graphs[ii].nodes()) > maxValue:
-                maxValue = len(sub_graphs[ii].nodes())
-                maxIndex = ii
-    # info: GSub: biggest subgraph
-    GSub = sub_graphs[maxIndex]
-    return GSub
-
+    Gcc = sorted(nx.connected_components(G), key=len, reverse=True)
+    Gc = G.subgraph(Gcc[0])
+    return Gc
+    
 def append_zero(innerData):
     """
     info: append 0 to all members of an innerData - object
@@ -290,7 +276,7 @@ def degree_mean(GSub):
     output: degree_mean: mean degree number (real number)
     """
    
-    degrees = GSub.degree()
+    degrees = [el[1] for el in GSub.degree()]
     degree_mean = sum(degrees)/len(degrees)
     return degree_mean
 
@@ -324,3 +310,4 @@ def makeDegreeDistribution(G): # I think the name does not describe, what that a
     #     clustersizes.append(len(clusters[i]))
     clustersizes = [cluster.size for cluster in clusters]
     return clustersizes, c
+

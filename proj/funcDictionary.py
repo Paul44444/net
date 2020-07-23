@@ -1,24 +1,7 @@
-# info: some general functions:
-
 import numpy as np
 import networkx as nx
 
-#import pyspark
 from imnet import process_strings as p  # used?
-
-#import subprocess
-#import re
-#from IPython.display import HTML
-
-#import sparkhpc
-#from sparkhpc import sparkjob
-#from sparkhpc.sparkjob import LSFSparkJob
-#import findspark
-#from scipy.sparse import csr_matrix
-
-#from plotData import PlotData
-#from plotData import InnerDataLevenshtein
-#from plotData import PlotDataLevenshtein
 
 def make_nets(ls, seq): # We still need seq? What is that?
     """

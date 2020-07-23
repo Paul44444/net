@@ -27,6 +27,8 @@ def make_nets(ls, seq):
 
     # info: insert every sequence in the net for its size.
     #     Thus all sequences with one size are in one net
+    #     Note that dividing by 3 is used to convert 
+    #     nucleic acids to amino acids.
     for seqEl in seq:
         seqElIndex = int((len(seqEl) - lsHist[1][0])/3)
         nets[seqElIndex].append(seqEl)

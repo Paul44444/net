@@ -20,8 +20,6 @@ def make_nets(ls, seq):
     lsHist = np.histogram(ls, bins = np.arange(0, 120, 3))
     xArgs = lsHist[1][:]
 
-    # keep in mind, that this is the average:
-
     # info: make empty list of nets:
     nets = list()
     for i in range(len(lsHist[0])+1):

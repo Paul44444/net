@@ -28,46 +28,47 @@ def make_sub_graphs(G):
 
     return sub_graphs
 
-def degree_mean(GSub):
-    """
-    info: calculate the average degree in the graph GSub
-    input: GSub: graph
-    output: deg: average degree number (real number)
-    """
-    deg = 0
-    degs = GSub.degree()
-    degs = list(degs)
-    for el in degs:
-        deg += el[1]/(len(degs))
-    return deg
-
-def makeNet(names, maxDist):
-    """
-    info: make graph, where each node denotes one element of names. 
-        names is an array of strings.
-        if the jaccard distance between the strings, corresponding 
-        to two nodes, is lower than "maxDist", an edge is drawn
-    input: names:[String]:  list of strings
-        maxDist (real number from 0 to 1): maximum jaccard distance between two strings,
-            which is required to form a bond
-    output: g: created graph, where each strain is a node and two nodes are
-        connected via an edge, if there jaccard distance is smaller
-        than maxDist
-    """
-    g = nx.Graph()
-
-    #print("\n names: ", names)
-    for i in range(len(names)):
-        g.add_node(names[i])
-
-    for i in range(len(names)):
-        for j in range(len(names)):
-            if not (i == j):
-                if jaccardDist(names[i], names[j]) < maxDist:
-                    g.add_edge(names[i], names[j])
-    #print("\n names: ", list(names))
-    #print("\n g.nodes(): ", g.nodes())
-    return g
+#def degree_mean(GSub):
+#    """
+#    info: calculate the average degree in the graph GSub
+#    input: GSub: graph
+#    output: deg: average degree number (real number)
+#    """
+#    deg = 0
+#    degs = GSub.degree()
+#    degs = list(degs)
+#    for el in degs:
+#        deg += el[1]/(len(degs))
+#    return deg
+#
+#def makeNet(names, maxDist):
+#    """
+#    info: make graph, where each node denotes one element of names. 
+#        names is an array of strings.
+#        if the jaccard distance between the strings, corresponding 
+#        to two nodes, is lower than "maxDist", an edge is drawn
+#    input: names:[String]:  list of strings
+#        maxDist (real number from 0 to 1): maximum jaccard distance between two strings,
+#            which is required to form a bond
+#    output: g: created graph, where each strain is a node and two nodes are
+#        connected via an edge, if there jaccard distance is smaller
+#        than maxDist
+#    """
+#    g = nx.Graph()
+#
+#    #print("\n names: ", names)
+#    for i in range(len(names)):
+#        g.add_node(names[i])
+#
+#    for i in range(len(names)):
+#        for j in range(len(names)):
+#            if not (i == j):
+#                if jaccardDist(names[i], names[j]) < maxDist:
+#                    g.add_edge(names[i], names[j])
+#    #print("\n names: ", list(names))
+#    #print("\n g.nodes(): ", g.nodes())
+#    return g
+#    
 def jaccardDist(name1, name2):
     """
     info: calculate the jaccard distance between the two strings 

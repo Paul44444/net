@@ -21,11 +21,11 @@ The files ```singleNet.py```, ```manyNets.py```, ```levenshtein.py```, ```jaccar
 ```funcDictionaryLevenshtein.py```, ```funcDictionaryJaccard.py```, ```funcDictionary.py```. The letter dictionary contains 
 general functions, which are used by all of the for analysis script.
 
-The file ```singleNet.py``` analyzes a network that is based on the similarity characteristics of ```N``` TCR sequences, which we generated with the ```SONIA``` package.
-The file ```manyNets.py``` compares the network properties of networks.
-The file ```levenshtein.py``` analyzes the network properties in dependence of the maximum allowed Levenshtein distance for 
+* ```singleNet.py``` analyzes a network that is based on the similarity characteristics of ```N``` TCR sequences, which we generated with the ```SONIA``` package.
+* ```manyNets.py``` compares the network properties of networks.
+* ```levenshtein.py``` analyzes the network properties in dependence of the maximum allowed Levenshtein distance for 
 creating an edge between two nodes, where each node represents a DNA strain.
-The file ```jaccard.py```  does the same, but uses the jaccard distance.
+* ```jaccard.py```  does the same, but uses the jaccard distance.
 
 <!--- <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1"> --->
 

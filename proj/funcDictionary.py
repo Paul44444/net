@@ -106,7 +106,7 @@ def loadSequence(step, plotData, i = -1, isExtractNum = True):
 
 def make_sub_graphs(G):
     """
-    info: make list of connected subgraphs of G (subgraph with the highest number of nodes) 
+    info: make list of connected subgraphs of G (subgraph with the largest number of nodes) 
     input: G: graph
     output: sub_graphs: list of subgraphs, sorted according to size
     """

@@ -3,7 +3,7 @@ import networkx as nx
 
 from imnet import process_strings as p  # used?
 
-def make_nets(ls, seq): # We still need seq? What is that?
+def make_nets(ls, seq): 
     """
     info: make a list "nets", where each element "net" is 
         a list again, containing all sequences with a certain 

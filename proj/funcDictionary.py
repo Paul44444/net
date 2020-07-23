@@ -89,6 +89,11 @@ def loadSequence(step, plotData, i = -1, isExtractNum = True):
             if index < N:
                 a.append(line.split('\t'))
                 # info: attach the fourth element  to a4
+                #     the txt data consists of 4 columns. The 4th column
+                #     contains the strains, which are relevant
+                #     for our analysis. In order to load
+                #     them, we extract the fourth
+                #     element of each line.
                 a4.append(a[index][3].replace('\n', ''))
                 if isExtractNum == True:
                     seq.append(a4[index][:plotData.extractNum])

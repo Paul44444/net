@@ -308,12 +308,17 @@ def makeDegreeDistribution(G): # I think the name does not describe, what that a
 
     # info: make list c, which only contains the degree values
     c = list()
-    for i in range(len(b)):
-        # what is this element? ...; Is that later used?
-        c.append(b[i][1])
-        # info: make the clusters, clustersizes
+    
+    c = [el[1] for el in b]
+    #for i in range(len(b)):
+    #    # what is this element? ...; Is that later used?
+    #    c.append(b[i][1])
+    #    
+    
+    # info: make the clusters, clustersizes    
     clusters = list(nx.connected_components(G))
-    clustersizes = list()
-    for i in range(len(clusters)):
-        clustersizes.append(len(clusters[i]))
+    #clustersizes = list()
+    #for i in range(len(clusters)):
+    #     clustersizes.append(len(clusters[i]))
+    clustersizes = [cluster.size for cluster in clusters]
     return clustersizes, c

@@ -1,5 +1,5 @@
 """
-info: 
+info (this is all done in the sim()-function, the other functions don't do scientific analysis): 
     - choose all DNA string with a certain length l and construct a network, only from 
     these string;
     - investigate network properties

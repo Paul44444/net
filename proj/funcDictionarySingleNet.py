@@ -17,10 +17,10 @@ def calculateProperties(G, c):
             outputting the input c as the output again, doing nothing 
             with it
         (clustersizes: ??? (currently not returned, why not?))
-        GnamesHist1: list, containing the frequencies of the strains
+        GnamesHist1: list, containing the frequencies of the strings
     """
 
-    # list of strains in G
+    # list of strings in G
     Gnames = list(G)
     
     for i in range(len(Gnames)):
@@ -47,7 +47,7 @@ def calculateProperties(G, c):
             #     if yes, than add 1 to the frequency value at the
             #     corresponding index
             # 
-            #     else: (isIn == 0), append the strain to the GnamesHist array 
+            #     else: (isIn == 0), append the string to the GnamesHist array 
             #     and set the frequency to 1
             for j in range(len(GnamesHist)):
                 if GnamesHist[j][0] == Gnames[i]:

@@ -1,7 +1,7 @@
 """
 info: 
-    - choose all DNA strains with a certain length l and construct a network, only from 
-    these strains;
+    - choose all DNA string with a certain length l and construct a network, only from 
+    these string;
     - investigate network properties
     - analyze the results over different lengths l.
     - use the JACCARD DISTANCE

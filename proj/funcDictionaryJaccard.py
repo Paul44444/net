@@ -36,7 +36,7 @@ def makeNet(names, maxDist):
     input: names:[String]:  list of strings
         maxDist (real number from 0 to 1): maximum jaccard distance between two strings,
             which is required to form a bond
-    output: g: created graph, where each strain is a node and two nodes are
+    output: g: created graph, where each string is a node and two nodes are
         connected via an edge, if there jaccard distance is smaller
         than maxDist
     """
@@ -94,7 +94,7 @@ def sim(step, plotData, isExtractNum):
         
         # info: load data
         a, a4, seq, filename, ls = dic.loadSequence(step, plotData, isExtractNum = isExtractNum)
-        # info: sort into a list, where each entry contains all strains with a certain length l
+        # info: sort into a list, where each entry contains all string with a certain length l
         nets = dic.make_nets(ls, seq)
         
         # What are interesting values to investigate?

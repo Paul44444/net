@@ -8,7 +8,7 @@ import funcDictionary as dic
 # Check, if the description correspond to the functions
 
 def calculateProperties(G, c):
-     # info: make Gnames -> distribution of number of each strain
+     # info: make Gnames -> distribution of number of each string
     """
     info:  calculate the network properties for a graph G
     input: G: graph, c: ist of degree values of G

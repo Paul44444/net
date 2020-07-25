@@ -45,8 +45,8 @@ def loadSequence(step, plotData, i = -1, isExtractNum = True):
                  1 -> data after the Thymus selection (load from post.txt)
         plotData: PlotData object, that contains the important data and parameters;
             for more detail see documentation in plotData.py
-        i: int number of letters to be extracted from each strain, e.g. if i = 18,
-            then only the first 18 letters from each strain are extracted, the rest
+        i: int number of letters to be extracted from each string, e.g. if i = 18,
+            then only the first 18 letters from each string are extracted, the rest
             is ignored
         isExtractedNum: Bool, that says, if only a limited number of 
             letters should be extracted; Thus, if isExtractNum == False, it makes no
@@ -92,7 +92,7 @@ def loadSequence(step, plotData, i = -1, isExtractNum = True):
                 a.append(line.split('\t'))
                 # info: attach the fourth element  to a4
                 #     the txt data consists of 4 columns. The 4th column
-                #     contains the strains, which are relevant
+                #     contains the strings, which are relevant
                 #     for our analysis. In order to load
                 #     them, we extract the fourth
                 #     element of each line.
@@ -291,7 +291,7 @@ def makeDegreeDistribution(G): # I think the name does not describe, what that a
     # info: make a list of degrees of all nodes
     a = G.degree()
     
-    # info: b: list, where each element is an array: element 0 is the strain and element 1 is the corresponding degree value
+    # info: b: list, where each element is an array: element 0 is the string and element 1 is the corresponding degree value
     b = list(a)
 
     # info: make list c, which only contains the degree values

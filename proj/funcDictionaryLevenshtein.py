@@ -8,9 +8,9 @@ import funcDictionary as dic
 
 def make_graph(nets_i, min_ld, max_ld, scVal):
     """
-    info: use imnet in order to generate a network from the strains 
+    info: use imnet in order to generate a network from the strings 
         in "nets_i" (usually an element of nets)  
-    input: nets_i: list of DNA strains with same length (usually
+    input: nets_i: list of DNA strings with same length (usually
             an element of net) # check that
            min_ld: minimum Levenshtein 
                distance to make an edge, usually 0 # right?
@@ -19,7 +19,7 @@ def make_graph(nets_i, min_ld, max_ld, scVal):
            scVal: sparkContext (only important to increase processing 
                speed, no scientific relevance)
     output: G: graph, that has been generated; every node denotes one 
-               DNA strain; an edge is drawn between two nodes, if the 
+               DNA strings; an edge is drawn between two nodes, if the 
                Levenshtein distance is between min_ld, 
                max_ld (usually min_ld is 0)# right? 
     """

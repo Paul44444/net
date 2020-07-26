@@ -1,7 +1,7 @@
 """
 info (this is all done in the sim-function, the other functions don't do scientific analysis):
-    - choose all DNA strains with a certain length l and construct a network, only from 
-    these strains;
+    - choose all DNA strings with a certain length l and construct a network, only from 
+    these strings;
     - investigate network properties
     - analyze the results over different lengths l.
     - use the JACCARD DISTANCE

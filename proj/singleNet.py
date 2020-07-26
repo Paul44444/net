@@ -87,9 +87,9 @@ if __name__ == "__main__":
     plotData = PlotDataSingleNet()
 
     # info: set parameters
-    #     N: number of generated strains
+    #     N: number of generated strings
     #     min_ldVal/ max_ldVal: min. / max. levenshtein distance
-    #     extractNum: number of extracted amino acids from each strain
+    #     extractNum: number of extracted amino acids from each string
     #     alphaVal: 
     # What's alphaVal? 
     plotData.N = 10**3

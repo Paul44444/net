@@ -5,10 +5,11 @@ from imnet import process_strings as p
 from plotData import PlotDataSingleNet
 import funcDictionary as dic
 
+import pandas as pd
 # Check, if the description correspond to the functions
 
 def calculateProperties(G, c):
-     # info: make Gnames -> distribution of number of each string
+     # info: make Gnames -> distribution of number of each strain
     """
     info:  calculate the network properties for a graph G
     input: G: graph, c: ist of degree values of G
@@ -17,13 +18,18 @@ def calculateProperties(G, c):
             outputting the input c as the output again, doing nothing 
             with it
         (clustersizes: ??? (currently not returned, why not?))
-        GnamesHist1: list, containing the frequencies of the strings
+        GnamesHist1: list, containing the frequencies of the strains
     """
 
-    # list of strings in G
-    Gnames = list(G)
-    
+    # list of strains in G
+    Gnames = list(G) 
+    B = pd.Series(Gnames).value_counts()
+    GnamesHist1 = list(B)
+    """
     for i in range(len(Gnames)):
+        print("\n step B; i: ", i)
+        
+        
         j = 0
         # info: I think he wants to remove all numbers, so that only letters remain ( I think,
         #     in the past, where the strings were attached to some numbers, which 
@@ -39,6 +45,7 @@ def calculateProperties(G, c):
         # info: making array GnamesHist; Each element GnamesHist[i] is 
         #     an array again, containing the string at position 0 and 
         #     the frequency at position 1
+        
         GnamesHist = list()
         for i in range(len(Gnames)):
             isIn = 0
@@ -47,10 +54,12 @@ def calculateProperties(G, c):
             #     if yes, than add 1 to the frequency value at the
             #     corresponding index
             # 
-            #     else: (isIn == 0), append the string to the GnamesHist array 
+            #     else: (isIn == 0), append the strain to the GnamesHist array 
             #     and set the frequency to 1
+
             for j in range(len(GnamesHist)):
-                if GnamesHist[j][0] == Gnames[i]:
+                #if GnamesHist[j][0] == Gnames[i]:
+                if True:
                     GnamesHist[j][1] += 1
                     isIn = 1
             if isIn == 0:
@@ -58,12 +67,11 @@ def calculateProperties(G, c):
         
         # info: making array GnamesHist1, which just contains all frequency numbers
         GnamesHist1 = list()
+        
         for i in range(len(GnamesHist)):
             GnamesHist1.append(GnamesHist[i][1])
-
         # info: return the values, can be assigned to the corresponding -post and corresponding -pre variables
-      
-    print("\n c: ", c)
+    """
     return c, GnamesHist1
 
 def sim(scVal, plotData, isExtractNum): 

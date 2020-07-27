@@ -17,15 +17,14 @@ net
 
 This repository is still under construction and not yet finished. Please do not yet use it.
 
-The files ```singleNet.py```, ```manyNets.py```, ```levenshtein.py```, ```jaccard.py``` perform network analysis and save corresponding results as ```.txt``` files. The use functions from dictionaries in the corresponding ```funcDictionarySingleNet.py```, ```funcDictionaryManyNets.py```, 
-```funcDictionaryLevenshtein.py```, ```funcDictionaryJaccard.py```, ```funcDictionary.py```. The letter dictionary contains 
-general functions, which are used by all of the for analysis script.
+The files ```singleNet.py```, ```manyNets.py```, ```levenshtein.py```, ```jaccard.py``` perform network analysis and save corresponding results as ```.txt``` files. These files use functions from dictionaries in the corresponding files ```funcDictionarySingleNet.py```, ```funcDictionaryManyNets.py```, 
+```funcDictionaryLevenshtein.py```, ```funcDictionaryJaccard.py```, ```funcDictionary.py```. The file ```funcDictionary.py``` contains 
+general functions, which are used in all our analyses.
 
-* ```singleNet.py``` analyzes a network that is based on the similarity characteristics of ```N``` TCR sequences, which we generated with the ```SONIA``` package.
-* ```manyNets.py``` compares the network properties of networks.
-* ```levenshtein.py``` analyzes the network properties in dependence of the maximum allowed Levenshtein distance for 
-creating an edge between two nodes, where each node represents a DNA strain.
-* ```jaccard.py```  does the same, but uses the jaccard distance.
+* ```singleNet.py``` calls all network analysis functions that we use to study networks that are based on the Levensthein distance between ```N``` TCR sequences, which we generated with the ```SONIA``` package.
+* ```manyNets.py``` also calls network analysis functions as ```singleNet.py```, but for multiple networks.
+* ```levenshtein.py``` computes network properties for different Levenshtein-distance thresholds that determine when an edge between two nodes (i.e., unique TCR-receptor sequences) is established.
+* ```jaccard.py```  does the same as ```levenshtein.py```, but uses the Jaccard distance metric instead.
 
 <!--- <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1"> --->
 

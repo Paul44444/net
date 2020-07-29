@@ -1,8 +1,6 @@
 import numpy as np
 import networkx as nx
 
-from imnet import process_strings as p  # used?
-
 def make_nets(ls, seq): 
     """
     info: make a list "nets", where each element "net" is 
@@ -18,21 +16,27 @@ def make_nets(ls, seq):
     """
 
     lsHist = np.histogram(ls, bins = np.arange(0, 120, 3))
-    xArgs = lsHist[1][:]
-
-    # info: make empty list of nets:
-    nets = list()
-    for i in range(len(lsHist[0])+1):
-        nets.append(list())
 
     # info: insert every sequence in the net for its size.
     #     Thus all sequences with one size are in one net
     #     Note that dividing by 3 is used to convert 
     #     nucleic acids to amino acids.
+
+    nets = {}
+    
     for seqEl in seq:
+        
         seqElIndex = int((len(seqEl) - lsHist[1][0])/3)
-        nets[seqElIndex].append(seqEl)
+        
+        try:    
+            nets[seqElIndex].append(seqEl)
+        
+        except:
+            nets[seqElIndex] = []
+            nets[seqElIndex].append(seqEl)
+
     return nets
+
 def loadSequence(step, plotData, i = -1, isExtractNum = True):
     """
     info: - load the nucleic acid sequences, generated from SONIA 
@@ -115,7 +119,6 @@ def make_sub_graphs(G):
     # info: make sorted list of subgraphs
     sub_graphs = sorted(list(G.subgraph(c) for c in nx.connected_components(G)), key = len, reverse = True)
 
-
     # info: if sub_graphs is empty , make a base graph
     if len(sub_graphs) == 0:
         sub_graphs = list()
@@ -130,8 +133,11 @@ def largest_sub_graph(G):
     input: G: a graph
     output: Gc: largest component of G as subgraph
     """
+    
     Gcc = sorted(nx.connected_components(G), key=len, reverse=True)
+    
     Gc = G.subgraph(Gcc[0])
+    
     return Gc
     
 def append_zero(innerData):
@@ -276,8 +282,8 @@ def degree_mean(GSub):
     output: degree_mean: mean degree number (real number)
     """
    
-    degrees = [el[1] for el in GSub.degree()]
-    degree_mean = sum(degrees)/len(degrees)
+    degrees = np.fromiter(dict(GSub.degree()).values(), dtype=float)
+    degree_mean = np.mean(degrees)
     return degree_mean
 
 def makeDegreeDistribution(G): # I think the name does not describe, what that actually does; better change name

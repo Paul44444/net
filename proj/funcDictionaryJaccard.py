@@ -49,8 +49,9 @@ def makeNet(names, maxDist):
         for j in range(len(names)):
             if not (i == j):
                 if jaccardDist(names[i], names[j]) < maxDist:
-                    g.add_edge(names[i], names[j])
+                    g.add_edge(names[i], names[j])                    
     return g
+
 def jaccardDist(name1, name2):
     """
     info: calculate the jaccard distance between the two strings 
@@ -99,7 +100,7 @@ def sim(step, plotData, isExtractNum):
         
         # What are interesting values to investigate?
     
-        clusterMinLen = 10	
+        clusterMinLen = 10	2560
         for i in range(len(nets)):
             if len(nets[i]) > clusterMinLen:
                 G = makeNet(nets[i], plotData.maxDist)

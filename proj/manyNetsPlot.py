@@ -10,8 +10,6 @@ from matplotlib.collections import PatchCollection
 from matplotlib.colors import ListedColormap
 from collections import OrderedDict
 
-import imnet
-import pyspark
 from imnet import random_strings as r
 from imnet import process_strings as p
 

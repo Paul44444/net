@@ -8,7 +8,6 @@ info (this is all done in the sim()-function, the other functions don't do scien
 """
 
 import os
-import pyspark
 
 from sparkhpc import sparkjob
 import findspark

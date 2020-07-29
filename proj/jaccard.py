@@ -97,7 +97,9 @@ def write(step, plotData):
     for i in range(len(degreeMeanAllErr)):
         text_file.write(str("\n " + str(degreeMeanAllErr[i])))
     text_file.close()
+    
 if __name__ == "__main__":
+    
     # info: make no scVal, because it is not needed
     scVal = -1
     
